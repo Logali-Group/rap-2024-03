@@ -1,0 +1,42 @@
+interface;
+use draft;
+
+define behavior for ZI_TRAVEL_268 alias Travel
+{
+  use create;
+  use update;
+  use delete;
+
+  use action acceptTravel;
+  use action rejectTravel;
+  use action deductDiscount;
+  use action validateAgencyID;
+  use action validateCustomerID;
+  use action validateDateRanges;
+
+  use action Resume;
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Prepare;
+
+  use association _Booking { create; with draft; }
+}
+
+define behavior for ZI_BOOKING_268 alias Booking
+{
+  use update;
+  use delete;
+
+  use association _BookingSupplement { create; with draft; }
+  use association _Travel { with draft; }
+}
+
+define behavior for ZI_BKSUPPL_268 alias BookingSupplement
+{
+  use update;
+  use delete;
+
+  use association _Travel { with draft; }
+  use association _Booking { with draft; }
+}
